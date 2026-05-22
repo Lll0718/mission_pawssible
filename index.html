@@ -17,18 +17,18 @@ body {
   flex-direction: column;
   align-items: center;
 
-  /* 🔑 核心：统一所有页面的顶部安全距离 */
-  padding-top: 220px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 40px;
-
-  /* 修复背景：不拉伸、居中、覆盖 */
+  /* 🔑 固定背景核心设置 */
   background-image: url('paw_background.png');
   background-repeat: no-repeat;
   background-position: top center;
   background-size: cover;
-  background-attachment: fixed;
+  background-attachment: fixed; /* 背景锁定，不会随页面滚动 */
+
+  /* 内容下移，避开LOGO */
+  padding-top: 240px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 40px;
 
   font-family: Arial;
   text-align: center;
@@ -79,7 +79,7 @@ img {
   text-align: left;
 }
 
-/* 🔑 修复：让第二页的Next按钮居中 */
+/* 第二页Next按钮居中 */
 #dog-story #nextButton {
   display: block;
   margin: 30px auto 0;
@@ -179,7 +179,7 @@ img {
 /* 手机端适配 */
 @media screen and (max-width:768px) {
   body {
-    padding-top: 240px;
+    padding-top: 260px;
   }
 
   h1 {
@@ -222,7 +222,6 @@ h1,h2,h3,p {
   word-break: break-word;
   text-align: center;
 }
-
     
   </style>
 </head>
