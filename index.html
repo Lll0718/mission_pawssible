@@ -2,7 +2,8 @@
 <html>
 <head>
   <title>Meet with Dogs</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 🔑 强制视口锁定，禁止缩放 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <style>
     * {
       margin: 0;
@@ -10,7 +11,13 @@
       box-sizing: border-box;
     }
 
-    /* ✅ 终极固定背景：永远不动，手机也生效 */
+    html, body {
+      /* 🔑 彻底禁止页面滚动 */
+      overflow: hidden;
+      height: 100%;
+    }
+
+    /* ✅ 终极背景层：3D加速 + 固定 + 不响应点击 */
     .fixed-bg {
       position: fixed;
       top: 0;
@@ -21,16 +28,19 @@
       background-repeat: no-repeat;
       background-position: top center;
       background-size: cover;
-      z-index: -1; /* 放在最底层，不挡住内容 */
+      z-index: -99;
+      pointer-events: none; /* 不挡住点击 */
+      /* 🔑 强制GPU 3D加速，手机不抖动 */
+      transform: translate3d(0,0,0);
+      will-change: transform;
     }
 
     body {
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
 
-      /* 内容下移，不挡LOGO */
+      /* 内容整体下移，避开LOGO */
       padding-top: 240px;
       padding-left: 15px;
       padding-right: 15px;
@@ -206,7 +216,7 @@
 </head>
 
 <body>
-  <!-- ✅ 固定背景层 -->
+  <!-- ✅ 独立背景层，GPU加速，手机绝对不动 -->
   <div class="fixed-bg"></div>
 
   <!-- 第一页 -->
@@ -273,7 +283,7 @@
     </div>
   </div>
 
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi.pure.mini.js"></script>
   <script>
     function showdogstory(){
       document.getElementById("mainPage").classList.add("fade-out");
