@@ -4,241 +4,217 @@
   <title>Meet with Dogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-
     * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    /* ✅ 终极固定背景：永远不动，手机也生效 */
+    .fixed-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('paw_background.png');
+      background-repeat: no-repeat;
+      background-position: top center;
+      background-size: cover;
+      z-index: -1; /* 放在最底层，不挡住内容 */
+    }
 
-  /* 🔑 固定背景核心设置 */
-  background-image: url('paw_background.png');
-  background-repeat: no-repeat;
-  background-position: top center;
-  background-size: cover;
-  background-attachment: fixed; /* 背景锁定，不会随页面滚动 */
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
-  /* 内容下移，避开LOGO */
-  padding-top: 240px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 40px;
+      /* 内容下移，不挡LOGO */
+      padding-top: 240px;
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-bottom: 40px;
 
-  font-family: Arial;
-  text-align: center;
-}
+      font-family: Arial;
+      text-align: center;
+      position: relative;
+    }
 
-.fade-in {
-  animation: fadeIn 2s;
-}
+    .fade-in {
+      animation: fadeIn 2s;
+    }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0px); }
+    }
 
-.fade-out {
-  animation: fadeOut 1s forwards;
-}
+    .fade-out {
+      animation: fadeOut 1s forwards;
+    }
 
-@keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; }
-}
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
 
-button {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
+    button {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
 
-img {
-  max-width: 100%;
-  height: auto;
-  margin-top: 10px;
-}
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 10px;
+    }
 
-#dog-story {
-  font-size: 28px;
-  width: 90%;
-  line-height: 1.6;
-  display: none;
-  text-align: left;
-}
+    #dog-story {
+      font-size: 28px;
+      width: 90%;
+      line-height: 1.6;
+      display: none;
+      text-align: left;
+    }
 
-/* 第二页Next按钮居中 */
-#dog-story #nextButton {
-  display: block;
-  margin: 30px auto 0;
-}
+    /* ✅ 第二页按钮强制居中 */
+    #dog-story #nextButton {
+      display: block !important;
+      margin: 30px auto 0 !important;
+      text-align: center;
+    }
 
-#nextButton, .socialButton {
-  margin-top: 20px;
-  background: #fff;
-  color: #000;
-  padding: 15px 30px;
-  border-radius: 14px;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
+    #nextButton, .socialButton {
+      margin-top: 20px;
+      background: #fff;
+      color: #000;
+      padding: 15px 30px;
+      border-radius: 14px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-#nextButton:hover, .socialButton:hover {
-  transform: scale(1.05);
-}
+    #nextButton:hover, .socialButton:hover {
+      transform: scale(1.05);
+    }
 
-#gallery {
-  display: none;
-  margin-top: 20px;
-  width: 100%;
-}
+    #gallery {
+      display: none;
+      margin-top: 20px;
+      width: 100%;
+    }
 
-.gallery-text {
-  margin: 20px 0 30px;
-  font-size: 28px;
-  font-weight: bold;
-}
+    .gallery-text {
+      margin: 20px 0 30px;
+      font-size: 28px;
+      font-weight: bold;
+    }
 
-#shelters {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-}
+    #shelters {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
 
-.shelter-card {
-  background: rgba(255,255,255,0.85);
-  padding: 25px;
-  border-radius: 25px;
-  width: min(380px, 95%);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
+    .shelter-card {
+      background: rgba(255,255,255,0.85);
+      padding: 25px;
+      border-radius: 25px;
+      width: min(380px, 95%);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
 
-.logo {
-  width: 90px;
-}
+    .logo {
+      width: 90px;
+    }
 
-.carousel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 20px;
-}
+    .carousel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
 
-.carousel button {
-  background: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  font-size: 28px;
-  cursor: pointer;
-}
+    .carousel button {
+      background: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 28px;
+      cursor: pointer;
+    }
 
-.animal-photo {
-  max-width: 220px;
-  height: 390px;
-  object-fit: contain;
-  border-radius: 20px;
-  transition: 0.3s;
-}
+    .animal-photo {
+      max-width: 220px;
+      height: 390px;
+      object-fit: contain;
+      border-radius: 20px;
+      transition: 0.3s;
+    }
 
-.animal-photo:hover {
-  transform: scale(1.03);
-}
+    .animal-photo:hover {
+      transform: scale(1.03);
+    }
 
-.button-group {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
-  margin-top: 25px;
-}
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
 
-.footer-message {
-  margin: 35px 0 20px;
-  font-size: 18px;
-  font-weight: 600;
-}
+    .footer-message {
+      margin: 35px 0 20px;
+      font-size: 18px;
+      font-weight: 600;
+    }
 
-/* 手机端适配 */
-@media screen and (max-width:768px) {
-  body {
-    padding-top: 260px;
-  }
+    /* 手机端 */
+    @media screen and (max-width:768px) {
+      body {
+        padding-top: 260px;
+      }
+      h1 { font-size: 42px; }
+      h2 { font-size: 26px; }
+      h3 { font-size: 22px; margin-top:15px; }
+      #dog-story { width:98%; font-size:22px; }
+      .gallery-text { font-size:22px; }
+      #shelters { flex-direction:column; align-items:center; gap:25px; }
+      .socialButton, #nextButton { font-size:16px; padding:12px 20px; }
+      .footer-message { font-size:16px; }
+    }
 
-  h1 {
-    font-size: 42px;
-  }
-  h2 {
-    font-size: 26px;
-  }
-  h3 {
-    font-size: 22px;
-    margin-top: 15px;
-  }
-  #dog-story {
-    width: 98%;
-    font-size: 22px;
-  }
-  .gallery-text {
-    font-size: 22px;
-  }
-  #shelters {
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
-  }
-  .socialButton, #nextButton {
-    font-size: 16px;
-    padding: 12px 20px;
-  }
-  .footer-message {
-    font-size: 16px;
-  }
-}
+    #mainPage, #dog-story, #gallery {
+      width: 100%;
+      max-width: 600px;
+    }
 
-#mainPage, #dog-story, #gallery {
-  width: 100%;
-  max-width: 600px;
-}
-
-h1,h2,h3,p {
-  word-break: break-word;
-  text-align: center;
-}
-    
+    h1,h2,h3,p {
+      word-break: break-word;
+      text-align: center;
+    }
   </style>
 </head>
+
 <body>
+  <!-- ✅ 固定背景层 -->
+  <div class="fixed-bg"></div>
+
   <!-- 第一页 -->
   <div id="mainPage" class="fade-in">
-    <h1>
-      <strong><em>Jamie</em></strong>
-    </h1>
-    <h2>
-      My name is Jamie <br>
-      I am two years old!
-    </h2>
+    <h1><strong><em>Jamie</em></strong></h1>
+    <h2>My name is Jamie <br>I am two years old!</h2>
     <img src="who_removed.png" width="220px">
-    <h3>
-      Try to high five with me!
-    </h3>
+    <h3>Try to high five with me!</h3>
     <button onclick="showdogstory()">
       <img src="paw_removed.png" width="150px">
     </button>
@@ -255,68 +231,45 @@ h1,h2,h3,p {
       he finally start to trust humans again.
       Now he is waiting for a warm home.
     </p>
-    <button id="nextButton" onclick="showGallery()">
-      Next
-    </button>
+    <button id="nextButton" onclick="showGallery()">Next</button>
   </div>
 
   <!-- 最后一页 -->
   <div id="gallery" class="fade-in">
-    <div class="gallery-text">
-      Want to adopt me? Contact these shelters below!
-    </div>
+    <div class="gallery-text">Want to adopt me? Contact these shelters below!</div>
     <div id="shelters">
-      <!-- Shelter 1 -->
       <div class="shelter-card">
         <img src="logo1.png" class="logo">
         <h2>Protetora Bruna</h2>
         <div class="carousel">
-          <button onclick="prevSlide('slider1')">
-            &#10094;
-          </button>
-          <img id="slider1"
-               src="rescue1dog1.png"
-               class="animal-photo">
-          <button onclick="nextSlide('slider1')">
-            &#10095;
-          </button>
+          <button onclick="prevSlide('slider1')">&#10094;</button>
+          <img id="slider1" src="rescue1dog1.png" class="animal-photo">
+          <button onclick="nextSlide('slider1')">&#10095;</button>
         </div>
       </div>
-      <!-- Shelter 2 -->
+
       <div class="shelter-card">
         <img src="logo2.png" class="logo">
         <h2>Abrigo de Seu Alberto</h2>
         <div class="carousel">
-          <button onclick="prevSlide('slider2')">
-            &#10094;
-          </button>
-          <img id="slider2"
-               src="rescue2dog1.png"
-               class="animal-photo">
-          <button onclick="nextSlide('slider2')">
-            &#10095;
-          </button>
+          <button onclick="prevSlide('slider2')">&#10094;</button>
+          <img id="slider2" src="rescue2dog1.png" class="animal-photo">
+          <button onclick="nextSlide('slider2')">&#10095;</button>
         </div>
       </div>
     </div>
 
-    <!-- Instagram Buttons -->
     <div class="button-group">
-      <button class="socialButton"
-        onclick="window.open('https://www.instagram.com/protetorabruna?igsh=MWw3Y2c0cTJvNDd4Mw==','_blank')">
+      <button class="socialButton" onclick="window.open('https://www.instagram.com/protetorabruna?igsh=MWw3Y2c0cTJvNDd4Mw==','_blank')">
         Click to see Protetora Bruna's Instagram
       </button>
-      <button class="socialButton"
-        onclick="window.open('https://www.instagram.com/abrigodeseualberto?igsh=YWxxM3ZsZTZ6Zmtw','_blank')">
+      <button class="socialButton" onclick="window.open('https://www.instagram.com/abrigodeseualberto?igsh=YWxxM3ZsZTZ6Zmtw','_blank')">
         Click to see Abrigo de Seu Alberto's Instagram
       </button>
     </div>
 
-    <!-- Visitor Counter -->
     <div class="footer-message">
-      🐾 Already
-      <span id="busuanzi_value_site_pv"></span>
-      people have viewed our adoption information.
+      🐾 Already <span id="busuanzi_value_site_pv"></span> people have viewed our adoption information.
     </div>
   </div>
 
@@ -324,69 +277,33 @@ h1,h2,h3,p {
   <script>
     function showdogstory(){
       document.getElementById("mainPage").classList.add("fade-out");
-      setTimeout(function(){
-        document.getElementById("mainPage").style.display = "none";
-        document.getElementById("dog-story").style.display = "block";
+      setTimeout(()=>{
+        document.getElementById("mainPage").style.display="none";
+        document.getElementById("dog-story").style.display="block";
       },1000);
     }
 
     function showGallery(){
       document.getElementById("dog-story").classList.add("fade-out");
-      setTimeout(function(){
-        document.getElementById("dog-story").style.display = "none";
-        document.getElementById("gallery").style.display = "block";
+      setTimeout(()=>{
+        document.getElementById("dog-story").style.display="none";
+        document.getElementById("gallery").style.display="block";
       },1000);
     }
 
     const sliders = {
-      slider1: {
-        images: [
-          "rescue1dog1.png",
-          "rescue1dog2.png",
-          "rescue1dog3.png",
-          "rescue1dog4.png",
-          "rescue1dog5.png",
-          "rescue1dog6.png",
-          "rescue1dog7.png",
-          "rescue1dog8.png",
-          "rescue1dog9.png",
-          "rescue1dog11.png",
-        ],
-        index:0
-      },
-      slider2: {
-        images: [
-          "rescue2dog1.png",
-          "rescue2dog2.png",
-          "rescue2dog3.png",
-          "rescue2dog4.png",
-          "rescue2dog5.png",
-          "rescue2dog6.png",
-          "rescue2dog7.png",
-          "rescue2dog8.png",
-          "rescue2dog9.png",
-          "rescue2dog10.png"
-        ],
-        index:0
-      }
+      slider1:{images:["rescue1dog1.png","rescue1dog2.png","rescue1dog3.png","rescue1dog4.png","rescue1dog5.png","rescue1dog6.png","rescue1dog7.png","rescue1dog8.png","rescue1dog9.png","rescue1dog11.png"],index:0},
+      slider2:{images:["rescue2dog1.png","rescue2dog2.png","rescue2dog3.png","rescue2dog4.png","rescue2dog5.png","rescue2dog6.png","rescue2dog7.png","rescue2dog8.png","rescue2dog9.png","rescue2dog10.png"],index:0}
     };
 
     function nextSlide(id){
-      let slider = sliders[id];
-      slider.index++;
-      if(slider.index >= slider.images.length){
-        slider.index = 0;
-      }
-      document.getElementById(id).src = slider.images[slider.index];
+      let s=sliders[id]; s.index++; if(s.index>=s.images.length)s.index=0;
+      document.getElementById(id).src=s.images[s.index];
     }
 
     function prevSlide(id){
-      let slider = sliders[id];
-      slider.index--;
-      if(slider.index < 0){
-        slider.index = slider.images.length - 1;
-      }
-      document.getElementById(id).src = slider.images[slider.index];
+      let s=sliders[id]; s.index--; if(s.index<0)s.index=s.images.length-1;
+      document.getElementById(id).src=s.images[s.index];
     }
   </script>
 </body>
