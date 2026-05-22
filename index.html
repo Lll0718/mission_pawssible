@@ -4,108 +4,218 @@
   <title>Meet with Dogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-       *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
-    body{
-    padding: env(safe-area-inset-top) 15px 20px;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    background-image:url('paw_background.png');
-    background-repeat:no-repeat;
-    background-position:center;
-    background-size:cover;
-    font-family:Arial;
-    text-align:center;
+      
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-    .fade-in{
-        animation:fadeIn 2s;
-    }
+body {
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    @keyframes fadeIn{
-        from{
-            opacity:0;
-            transform:translateY(20px);
-        }
-        to{
-            opacity:1;
-            transform:translateY(0px);
-        }
-    }
+  /* 关键：给顶部留出足够空间显示LOGO */
+  padding-top: 140px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 40px;
 
-    .fade-out{
-        animation:fadeOut 1s forwards;
-    }
-
-    @keyframes fadeOut{
-        from{opacity:1;}
-        to{opacity:0;}
-    }
-
-    button{
-        background:none;
-        border:none;
-        padding:0;
-        cursor:pointer;
-    }
-
-    img{
-        max-width:100%;
-        height:auto;
-        margin-top:10px;
-    }
-
-    #dog-story{
-        font-size:28px;
-        width:90%;
-        line-height:1.6;
-        display:none;
-    }
-
-    #nextButton,.socialButton{
-        margin-top:20px;
-        background:#fff;
-        color:#000;
-        padding:15px 30px;
-        border-radius:14px;
-        font-size:20px;
-        font-weight:bold;
-        cursor:pointer;
-        transition:0.3s;
-    }
-    #nextButton:hover,.socialButton:hover{transform:scale(1.05);}
-
-    #gallery{display:none;margin-top:20px;width:100%;}
-    .gallery-text{margin:20px 0 30px;font-size:28px;font-weight:bold;}
-    #shelters{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;}
-    .shelter-card{background:rgba(255,255,255,0.85);padding:25px;border-radius:25px;width:min(380px,95%);box-shadow:0 4px 12px rgba(0,0,0,0.2);}
-    .logo{width:90px;}
-    .carousel{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:20px;}
-    .carousel button{background:#fff;border:none;border-radius:50%;width:45px;height:45px;font-size:28px;cursor:pointer;}
-    .animal-photo{max-width:220px;height:390px;object-fit:contain;border-radius:20px;transition:0.3s;}
-    .animal-photo:hover{transform:scale(1.03);}
-    .button-group{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin-top:25px;}
-    .footer-message{margin:35px 0 20px;font-size:18px;font-weight:600;}
-
-/* 手机端强制适配 */
-@media screen and (max-width:768px){
-    body{padding-top:max(40px,env(safe-area-inset-top));}
-    h1{font-size:42px;}
-    h2{font-size:26px;}
-    h3{font-size:22px;margin-top:15px;}
-    #dog-story{width:98%;font-size:22px;}
-    .gallery-text{font-size:22px;}
-    #shelters{flex-direction:column;align-items:center;gap:25px;}
-    .socialButton,#nextButton{font-size:16px;padding:12px 20px;}
-    .footer-message{font-size:16px;}
+  background-image: url('paw_background.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  font-family: Arial;
+  text-align: center;
 }
-#mainPage,#dog-story,#gallery{width:100%;max-width:600px;}
-h1,h2,h3,p{word-break:break-word;}
+
+.fade-in {
+  animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.fade-out {
+  animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+#dog-story {
+  font-size: 28px;
+  width: 90%;
+  line-height: 1.6;
+  display: none;
+  text-align: left;
+}
+
+#nextButton, .socialButton {
+  margin-top: 20px;
+  background: #fff;
+  color: #000;
+  padding: 15px 30px;
+  border-radius: 14px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#nextButton:hover, .socialButton:hover {
+  transform: scale(1.05);
+}
+
+#gallery {
+  display: none;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.gallery-text {
+  margin: 20px 0 30px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#shelters {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.shelter-card {
+  background: rgba(255,255,255,0.85);
+  padding: 25px;
+  border-radius: 25px;
+  width: min(380px, 95%);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.logo {
+  width: 90px;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.carousel button {
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.animal-photo {
+  max-width: 220px;
+  height: 390px;
+  object-fit: contain;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.animal-photo:hover {
+  transform: scale(1.03);
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+.footer-message {
+  margin: 35px 0 20px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* 手机端完美适配，不挡LOGO */
+@media screen and (max-width:768px) {
+  body {
+    /* 核心：顶部留出足够空位，完全不遮挡左上角LOGO */
+    padding-top: 160px;
+  }
+
+  h1 {
+    font-size: 42px;
+  }
+  h2 {
+    font-size: 26px;
+  }
+  h3 {
+    font-size: 22px;
+    margin-top: 15px;
+  }
+  #dog-story {
+    width: 98%;
+    font-size: 22px;
+  }
+  .gallery-text {
+    font-size: 22px;
+  }
+  #shelters {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+  .socialButton, #nextButton {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+  .footer-message {
+    font-size: 16px;
+  }
+}
+
+#mainPage, #dog-story, #gallery {
+  width: 100%;
+  max-width: 600px;
+}
+
+h1,h2,h3,p {
+  word-break: break-word;
+  text-align: center;
+}
+    
   </style>
 </head>
 <body>
